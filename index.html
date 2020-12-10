@@ -1,0 +1,356 @@
+<html lang="en"> 
+
+<head> 
+	<meta charset="UTF-8"> 
+	<title>Shipment</title> 
+
+	<!-- INCLUDING JQUERY-->
+	<script src= 
+"https://code.jquery.com/jquery-3.5.1.js"> 
+	</script> 
+
+	<!-- CSS FOR STYLING THE PAGE -->
+	<style> 
+		table { 
+			margin-left: 40% ; 
+			margin-right: 0% ; 
+			font-size: x-small; 
+			background-color: rgb(195, 196, 255);
+			border: 1px solid black; 
+		} 
+		 
+		h1 { 
+			text-align: center; 
+			color: #1c2b6b; 
+			font-size: xx-large; 
+			font-family: 'Gill Sans', 
+				'Gill Sans MT', ' Calibri', 
+				'Trebuchet MS', 'sans-serif'; 
+        } 
+        
+        h3 { 
+			text-align: center; 
+			color: #000000; 
+			 
+			font-family: 'Gill Sans', 
+				'Gill Sans MT', ' Calibri', 
+				'Trebuchet MS', 'sans-serif'; 
+		} 
+
+		td { 
+			background-color: #ffffff; 
+			border: 2px solid rgb(19, 70, 163); 
+		} 
+
+		
+		td ,th{ 
+			 
+			border: 1px solid rgb(194, 194, 194); 
+			padding: 10px; 
+			text-align: center; 
+        } 
+        
+        th {
+            font-weight:bold;
+        }
+
+		td { 
+			font-weight: lighter; 
+        } 
+        
+         
+
+		  .boss
+		  {
+			margin-left: 40%;
+			margin-bottom: 4px;
+
+		  }
+		  .button {
+			 
+             
+            background-color: #d5deff ;
+            border-radius: 5px; 
+			color: #305cff;
+			padding: 25px 25px;
+			text-align: center;
+			display: inline-block;
+			font-size: 20px;
+			transition: 0.4s;
+			margin-bottom: 10px ;
+			
+			 
+			}
+			 
+
+			.button:hover {
+			background-color: #305cff; /* Green */
+			color: white;
+			box-shadow: 0 12px 16px 0 rgba(154, 150, 214, 0.24), 0 17px 50px 0 rgba(56, 54, 54, 0.034);
+
+			 }
+
+			 h6{
+				position: absolute;
+				top: 0px;
+				left: 80px;
+				font-family: Verdana, Geneva, Tahoma, sans-serif;
+				color: rgb(0, 0, 0);
+				font-size: 14px;
+			 }
+
+			 
+
+			 .im1 {
+				position: absolute;
+				top: 8px;
+				left: 16px;
+				font-size: 18px;
+				
+			}
+			.im2 {
+				position: absolute;
+				top: 8px;
+				right: 16px;
+				font-size: 18px;
+				background-color: #d5deff;
+				border: 5px solid #d5deff;
+				border-radius: 100px;
+				 
+			}
+			.im4 {
+				position: absolute;
+				top: 30%;
+				left: 20px;
+				font-size: 18px;
+				background-color: #d5deff;
+				padding: 7px 7px;
+				border-radius: 2rem;
+			}
+			.im3 {
+				position: absolute;
+				background-color: #d5deff;
+				padding: 7px 7px;
+				border-radius: 2rem;
+				top: 80%;
+				left: 20px;
+				font-size: 18px;
+			}
+
+			.topnav {
+				position: absolute;
+				top: 8px;
+				right: 16px;
+				 
+				overflow: hidden;
+				}
+
+				/* Style the links inside the navigation bar */
+				.topnav a {
+				float: left;
+				color: black;
+				text-align: center;
+				padding: 10px;
+				text-decoration: none;
+				 
+				font-size: 17px;
+				}
+
+			 
+							
+						
+		   
+	</style> 
+</head> 
+
+<body> 
+	<section> 
+        <h1>SHIPMENT DETAILS</h1> 
+         
+        
+
+		<!-- TABLE CONSTRUCTION-->
+		<table id='table'> 
+			<!-- HEADING FORMATION -->
+			<tr> 
+				
+                <th>AWB NUMBER</th> 
+                <th>SOURCE</th> 
+				<th>DESTINATION</th> 
+                <th>START DATE</th> 
+                <th>ETD</th> 
+                <th>STATUS</th> 
+			</tr> 
+
+			 
+
+			<script> 
+				$(document).ready(function () { 
+                    $("#fetch1").click(function(event){ 
+					 
+					$.getJSON("db.json", function (data) { 
+						var student = ''; 
+ 
+						for (var i = 0; i < data.length; i++) {
+							var student = '';
+							if(data[i].current_status_code == "DEL"){
+								student += '<tr>';  
+
+								student += '<td>' + 
+									'#' +data[i].awbno + '</td>'; 
+
+								student += '<td>' + 
+									data[i].from+ '</td>';
+
+								student += '<td>' + 
+									data[i].to + '</td>'; 
+								var res = data[i].pickup_date.split(" ");
+								student += '<td>' + 
+									res[0] + '</td>'; 
+
+								var res = data[i].time.split(" ");
+								student += '<td>' + 
+									res[0] + '</td>';
+
+								student += '<td>' + 
+									data[i].current_status + '</td>';
+								
+								student += '</tr>'; }
+							$('#table').append(student);
+						}
+					 
+					}); 
+				}); 
+			});
+			
+			
+			</script> 
+			 
+			
+			 <script> 
+				$(document).ready(function () { 
+                    $("#fetch2").click(function(event){ 
+					 
+					$.getJSON("db.json", function (data) { 
+						var student = ''; 
+ 
+						for (var i = 0; i < data.length; i++) {
+							var student = '';
+							if(data[i].current_status_code == "INT"){
+								student += '<tr>';  
+
+								student += '<td>' + 
+									'#' +data[i].awbno + '</td>'; 
+
+								student += '<td>' + 
+									data[i].from+ '</td>';
+
+								student += '<td>' + 
+									data[i].to + '</td>'; 
+
+									var res = data[i].pickup_date.split(" ");
+								student += '<td>' + 
+									res[0] + '</td>';  
+								
+								var res = data[i].time.split(" ");
+
+								student += '<td>' + 
+									res[0] + '</td>';
+
+								student += '<td>' + 
+									data[i].current_status + '</td>';
+								
+								student += '</tr>'; }
+							$('#table').append(student);
+						}
+					 
+					}); 
+				}); 
+			});
+			
+			
+			</script>
+
+			<script> 
+				$(document).ready(function () { 
+					$("#fetch3").click(function(event){ 
+					
+					$.getJSON("db.json", function (data) { 
+						var student = ''; 
+
+						for (var i = 0; i < data.length; i++) {
+							var student = '';
+							if(data[i].current_status_code == "OOD"){
+								student += '<tr>';  
+
+								student += '<td>' + 
+									'#' +data[i].awbno + '</td>'; 
+
+								student += '<td>' + 
+									data[i].from+ '</td>';
+
+								student += '<td>' + 
+									data[i].to + '</td>'; 
+
+								var res = data[i].pickup_date.split(" ");
+								student += '<td>' + 
+									res[0] + '</td>'; 
+
+								var res = data[i].time.split(" ");
+								student += '<td>' + 
+									res[0] + '</td>';
+
+								student += '<td>' + 
+									data[i].current_status + '</td>';
+								
+								student += '</tr>'; }
+							$('#table').append(student);
+						}
+					
+					}); 
+				}); 
+			});
+
+
+			</script>
+
+
+			 
+			
+	</section> 
+</body> 
+
+<body> 
+    <h3> 
+        Click On The Button To Fetch Employee Data 
+    </h3> 
+         
+    
+    <div class="boss">
+		<button class="button button1" id = "fetch1" onclick="return false"> DEL </button>
+		<button class="button button2" id = "fetch2"> INT </button>
+		<button class="button button3" id = "fetch3"> OOD </button> 
+	</div> 
+	
+	
+		<h6>Intugine</h6>
+		<h6></h6>
+		<h6></h6>
+		<h6></h6>
+	 
+	<a href="#"><img  class = "im1" alt="LOGO" src="logo.svg" ></a>
+	<a href="#"><img src="profile.svg" class="im2" alt="PI" ></a>
+	<a href="#"><img src="warehouse.svg" class="im3" alt="WH"></a>
+	<a href="#"><img src="destination.svg" class="im4" alt="DES" ></a>
+
+	<div class="topnav">
+		<a class="active" href="#home">Home</a> 
+		<a href="#contact">Brands</a>
+		<a href="#about">Transporters</a>
+	  </div> 
+
+    
+      
+ </body> 
+
+</html> 
